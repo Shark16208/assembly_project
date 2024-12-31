@@ -6,6 +6,11 @@ MEMORY
 SECTIONS
 {
 .text : {
-    *(.text*)
+    *(.text)
+    *(.text.*)
   } > RAM
+.data : {
+    *(.data)
+    *(.data.*)
+}
 }
