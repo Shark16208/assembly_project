@@ -10,6 +10,12 @@ all: main.s
 	$(OBJCOPY) -O binary main.elf main.bin
 	xxd -e -c 4 -g 4 main.bin
 
+obj: main.s
+	$(GCC) -O0 -ggdb -nostartfiles -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tmain.ld main.s -o main
+
+run: 
+	qemu-riscv32 ./main
+
 debug:
 	qemu-system-riscv32 -S -M virt -nographic -bios none -kernel main.elf -gdb tcp::1234
 
