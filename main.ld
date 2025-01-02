@@ -17,17 +17,20 @@ MEMORY
 
 SECTIONS
 {
-  . = 0x80000000;
+  /* . = 0x80000000; */
   .text :
   {
     *(.text*)
-  }
+    *(.text.*)
+  } > RAM
   .data :
   {
     *(.data*)
-  }
+    *(.data.*)
+  } > RAM
   .bss :
   {
     *(.bss*)
-  }
+    *(.bss.*)
+  } > RAM
 }
