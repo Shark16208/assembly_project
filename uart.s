@@ -7,7 +7,9 @@
 _start:
     lw sp, STACK_START   # Set the stack pointer
     call get_put
-    ebreak
+end_loop:
+    wfi
+    j end_loop
 
 get_put:
     addi sp, sp, -8       # Reserve space for the return address
