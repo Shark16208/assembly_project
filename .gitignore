@@ -1,1 +1,2 @@
-sdsd
+game.S
+qemu-riscv32-virt.ld

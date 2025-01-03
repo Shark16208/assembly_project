@@ -24,7 +24,13 @@ obj2: $(FILE).s
 obj3: $(FILE).s
 	$(AS) -march=rv32i -mabi=ilp32 $(FILE).s -o $(FILE).o
 	$(GCC) -T main.ld -march=rv32i -mabi=ilp32 -nostdlib -static -o $(FILE).elf $(FILE).o
-	
+
+obj4:
+	riscv64-unknown-elf-as $(FILE).s -g -march=rv32im -mabi=ilp32 -o $(FILE).elf
+	riscv64-unknown-elf-ld -T qemu-riscv32-virt.ld -o $(FILE).linked.elf $(FILE).elf
+	# riscv64-unknown-elf-as $(FILE).S -g -march=rv32im -mabi=ilp32 -o $(FILE).o
+	# riscv64-unknown-elf-ld -T main.ld -o $(FILE).elf $(FILE).o
+
 run: 
 	qemu-riscv32 ./$(FILE)
 
@@ -35,6 +41,9 @@ run2:
 run3:
 	@echo "Ctrl-A C for QEMU console, then quit to exit"
 	qemu-system-riscv32 -nographic -serial mon:stdio -machine virt -bios none -kernel $(FILE).elf
+
+run4:
+	qemu-system-riscv32 -machine virt -kernel $(FILE).linked.elf -nographic -bios none
 
 debug:
 	qemu-system-riscv32 -S -M virt -nographic -bios none -kernel $(FILE).elf -gdb tcp::1234

@@ -7,7 +7,7 @@
 _start:
 	li a0, STDOUT       # File descriptor (stdout)
 	la a1, message      # Address of the message
-	li a2, 14           # Length of the message
+	li a2, 13           # Length of the message
 
 	li a7, WRITE        # Syscall number for write
 	ecall
@@ -18,7 +18,7 @@ _start:
 
 .section .data
 message:
-	.ascii "Hello World!\n"
+	.string "Hello World!\n"
 	
 
 # $(GCC)  -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tmain.ld $(FILE).s -o $(FILE).elf
