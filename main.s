@@ -19,4 +19,7 @@ _start:
 .section .data
 message:
 	.ascii "Hello World!\n"
+	
 
+# $(GCC)  -nostdlib -march=rv32i -mabi=ilp32 -Wl,-Tmain.ld $(FILE).s -o $(FILE).elf
+    # $(OBJCOPY) -O binary $(FILE).elf $(FILE).bin
